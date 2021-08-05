@@ -1,0 +1,107 @@
+table, th, td {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid black;
+  width: 80%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#table-header {
+  background-color: lightgreen;
+}
+
+.add-user-modal-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.place-bet-modal-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.add-user-bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.place-bet-bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.add-user-modal {
+  position: relative;
+  font-family: sans-serif;
+  background-color: white;
+  width: 30%;
+  height: 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.place-bet-modal {
+  position: relative;
+  font-family: sans-serif;
+  background-color: white;
+  width: 60%;
+  height: 60%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.add-user-modal button {
+  padding: 10px 30px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+.place-bet-modal button {
+  padding: 10px 30px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+#add-user-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#place-bet-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -6,7 +6,7 @@ table, th, td {
   text-align: center;
 }
 
-#table-header {
+.table-header {
   background-color: lightgreen;
 }
 

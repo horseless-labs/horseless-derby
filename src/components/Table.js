@@ -11,7 +11,11 @@ const Table = ({ sentData }) => {
   function printHorse() {
     var elements = [];
     for (const horse in sentData) {
-      elements.push(<tr><td>{sentData[horse].name}</td><td>{sentData[horse].odds}</td></tr>)
+      elements.push(
+        <tr  key={sentData[horse].name}> 
+          <td>{sentData[horse].name}</td>
+          <td>{sentData[horse].odds}</td>
+        </tr>)
     }
     return (
       elements
@@ -31,10 +35,6 @@ const Table = ({ sentData }) => {
           {printHorse()}
         </tbody>
       </table>
-      
-      {console.log("Hello from the bottom of Table")}
-      {console.log(sentData)}
-      {console.log(text)}
     </>
   )
 }

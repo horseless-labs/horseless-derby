@@ -14,27 +14,18 @@ const ShowRacersButton = ({ onClick }) => {
         }
       })
         .then(function(response) {
-          //console.log(response)
           return response.json();
         })
         .then(function(myJson) {
           setData(myJson);
           toggleReady(!ready);
-          //console.log(myJson.horses[0]);
-        });
-      }
-      
-  //useEffect(() => {
-    //getData()
-    //console.log("getData() fired")
-  //}, []);
+    });
+  }
 
   return (
     <>
-      <button className="showRacersButton" onClick={getData}>Show Racers!</button>
       <Table sentData={data['horses']} />
-      <p>{console.log("Hello from the bottom of ShowRacersButton!")}</p>
-      <p>{console.log(data['horses'])}</p>
+      <button className="showRacersButton" onClick={getData}>Show Racers!</button>
     </>
   )
 }

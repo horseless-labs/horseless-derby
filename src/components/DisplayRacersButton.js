@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Table from './Table'
 
-const ShowRacersButton = ({ onClick }) => {
+const DisplayRacersButton = () => {
   const [data, setData] = useState([])
   const [ready, toggleReady] = useState(false)
   
@@ -25,9 +25,10 @@ const ShowRacersButton = ({ onClick }) => {
   return (
     <>
       <Table sentData={data['horses']} />
+      {/* <button classname={className} onClick={getData}>Bullshit</button> */}
       <button className="showRacersButton" onClick={getData}>Show Racers!</button>
     </>
   )
 }
 
-export default ShowRacersButton
+export default DisplayRacersButton

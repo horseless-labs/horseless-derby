@@ -10,18 +10,29 @@ import PlaceBetsButton from './components/PlaceBetsButton'
 import RaceButton from './components/RaceButton'
 
 import AddUsersModal from './components/AddUsersModal'
+import PlaceBetsModal from './components/PlaceBetsModal'
+import RaceModal from './components/RaceModal'
 
 const Container = styled.div`
+  display: flex;
 `
 
 function App() {
   const [ready, setReady] = useState(false);
   const [showAddUsersModal, setAddUsersModal] = useState(false)
+  const [showPlaceBetsModal, setPlaceBetsModal] = useState(false)
+  const [showRaceModal, setRaceModal] = useState(false)
 
   const openAddUsersModal = () => {
-    console.log(showAddUsersModal)
     setAddUsersModal(!showAddUsersModal)
-    console.log(showAddUsersModal)
+  }
+
+  const openPlaceBetsModal = () => {
+    setPlaceBetsModal(!showPlaceBetsModal)
+  }
+
+  const openRaceModal = () => {
+    setRaceModal(!showRaceModal)
   }
   
   return (
@@ -33,14 +44,22 @@ function App() {
       <Container>
         <AddUsersButton onClick={openAddUsersModal} />
         <AddUsersModal
-          showAddUsersModal={showAddUsersModal}
-          setAddUsersModal={setAddUsersModal} />
+          showModal={showAddUsersModal}
+          setModal={setAddUsersModal} />
       </Container>
 
       <Container>
-        <PlaceBetsButton />
-        <RaceButton />
-        <GlobalStyle />
+        <PlaceBetsButton onClick={openPlaceBetsModal} />
+        <PlaceBetsModal 
+          showModal={showPlaceBetsModal}
+          setModal={setPlaceBetsModal} />
+      </Container>
+
+      <Container>
+        <RaceButton onClick={openRaceModal} />
+        <RaceModal 
+          showModal={showRaceModal}
+          setModal={setRaceModal} />
       </Container>
     </>
   );

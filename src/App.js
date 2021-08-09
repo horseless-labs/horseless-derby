@@ -12,10 +12,6 @@ import RaceButton from './components/RaceButton'
 import AddUsersModal from './components/AddUsersModal'
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 `
 
 function App() {
@@ -31,7 +27,7 @@ function App() {
   return (
     <>
       <Container>
-        <DisplayRacersButton /><p></p>
+        <DisplayRacersButton />
       </Container>
 
       <Container>
@@ -39,7 +35,9 @@ function App() {
         <AddUsersModal
           showAddUsersModal={showAddUsersModal}
           setAddUsersModal={setAddUsersModal} />
+      </Container>
 
+      <Container>
         <PlaceBetsButton />
         <RaceButton />
         <GlobalStyle />

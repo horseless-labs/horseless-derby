@@ -1,7 +1,7 @@
-const PlaceBetsButton = () => {
+const PlaceBetsButton = ({ onClick }) => {
   return (
   <>
-    <button className="placeBetsButton">Place Bets</button>
+    <button className="placeBetsButton" onClick={onClick}>Place Bets</button>
   </>
   )
 }

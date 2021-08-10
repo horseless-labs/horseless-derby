@@ -7,13 +7,13 @@ const AddUsersModal = ({ showModal , setModal }) => {
     return (
         <>
         {showModal ? (
-                <background>
+                <div className='background'>
                     <modal-wrapper showAddUsersModal={showModal}>
                         <modal-content>
                             <h1>Lorem Ipsum</h1>
                         </modal-content>
                     </modal-wrapper>
-                </background>
+                </div>
         ) : null}
         </>
     )

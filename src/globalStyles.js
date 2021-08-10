@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
       align-items: center;
     }
 
-    Background {
+    div.background {
       z-index: auto;
       display: flex;
       position: fixed;
@@ -77,6 +77,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
+      color: blue;
     }
 `
 

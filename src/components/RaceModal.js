@@ -12,7 +12,7 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const RaceModal = ({ showModal, setModal }) => {
+const RaceModal = ({ showModal, setShowModal }) => {
     return (
         <>
             { showModal ? ( console.log("Hello from RaceModal") ) : null }

@@ -77,8 +77,8 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    h1 {
-      color: blue;
+    label {
+      font-family: sans-serif;
     }
 `
 

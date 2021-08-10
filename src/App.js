@@ -44,21 +44,21 @@ function App() {
         <AddUsersButton onClick={openAddUsersModal} />
         <AddUsersModal
           showModal={showAddUsersModal}
-          setModal={setAddUsersModal} />
+          setShowModal={setAddUsersModal} />
       </Container>
 
       <Container>
         <PlaceBetsButton onClick={openPlaceBetsModal} />
         <PlaceBetsModal 
           showModal={showPlaceBetsModal}
-          setModal={setPlaceBetsModal} />
+          setShowModal={setPlaceBetsModal} />
       </Container>
 
       <Container>
         <RaceButton onClick={openRaceModal} />
         <RaceModal 
           showModal={showRaceModal}
-          setModal={setRaceModal} />
+          setShowModal={setRaceModal} />
       </Container>
     </>
   );

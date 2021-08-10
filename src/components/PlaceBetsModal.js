@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 
@@ -49,10 +49,11 @@ const ModalContent = styled.div`
     }
 `
 
-const PlaceBetsModal = ({ showModal, setModal }) => {
-    // Temporary dummy data
+const PlaceBetsModal = ({ showModal, setShowModal }) => {
+    const modalRef = useRef();
     const [bettor, setBettor] = useState("Select a Bettor")
 
+    // Temporary dummy data
     const bettors = [
         {name: "Marco", funds: 100},
         {name: "Micah", funds: 100}
@@ -62,10 +63,27 @@ const PlaceBetsModal = ({ showModal, setModal }) => {
         setBettor(e.target.value)
     }
 
+    const closeModal = (e) => {
+        if (modalRef.current === e.target) {
+            setShowModal(false)
+        }
+    }
+
+    const keyPress = useCallback(e => {
+        if(e.key === 'Escape' && showModal) {
+            setShowModal(false)
+        }
+    }, [setShowModal, showModal])
+
+    useEffect(() => {
+        document.addEventListener('keydown', keyPress)
+        return () => document.removeEventListener('keydown', keyPress)
+    }, [keyPress])
+
     return (
         <>
         {showModal ? (
-                <div className='modal-background'>
+                <div className='modal-background' ref={modalRef} onClick={closeModal}>
                     <ModalWrapper>
                         <ModalContent>
                             <label htmlFor='add-user-name'>Bettor:</label>
@@ -81,6 +99,7 @@ const PlaceBetsModal = ({ showModal, setModal }) => {
                             <button className="saveBet">OK</button>
                             <button className="cancel">Cancel</button>
                         </ModalContent>
+                        <CloseModalButton aria-label='Close Modal' onClick={() => setShowModal(!showModal)} />
                     </ModalWrapper>
                 </div>
         ) : null}

@@ -1,6 +1,42 @@
-import { useState, useEffect, useRef  } from 'react'
+import { useState, useEffect, useRef, useCallback  } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
+
+const ModalWrapper = styled.div`
+    width: 400px;
+    height: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #000;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+`
+
+const ModalContent = styled.div`
+    display: inline-block;
+    padding: 50px;
+    margin: center;
+    width: 100%;
+
+    line-height: 1.8;
+    color: #141414;
+
+    label {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    input {
+        margin: 10px;
+    }
+
+    button {
+        display: inline-block;
+    }
+`
 
 const CloseModalButton = styled(MdClose)`
     cursor: pointer;
@@ -13,20 +49,44 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const AddUsersModal = ({ showModal , setModal }) => {
+const AddUsersModal = ({ showModal , setShowModal }) => {
+    const modalRef = useRef();
+
+    const closeModal = (e) => {
+        if (modalRef.current === e.target) {
+            setShowModal(false)
+        }
+    }
+
+    const keyPress = useCallback(e => {
+        if(e.key === 'Escape' && showModal) {
+            setShowModal(false)
+        }
+    }, [setShowModal, showModal])
+
+    useEffect(() => {
+        document.addEventListener('keydown', keyPress)
+        return () => document.removeEventListener('keydown', keyPress)
+    }, [keyPress])
+
     return (
         <>
         {showModal ? (
-                <div className='modal-background'>
-                    <div className='modal-wrapper'>
-                        <div className='modal-content'>
-                            <label for='add-user-name'>Bettor:</label>
+                <div className='modal-background' ref={modalRef} onClick={closeModal}>
+                    <ModalWrapper>
+                        <ModalContent>
+                            <label htmlFor='add-user-name'>User Name</label>
                             <input className='add-user-name' placeholder="User Name" />
 
-                            <label for='add-user-amount'>Bet Amount:</label>
+                            <label htmlFor='add-user-amount'>Starting Funds</label>
                             <input className='add-user-amount' placeholder="0" />
-                        </div>
-                    </div>
+
+                            <button className="saveBet">OK</button>
+                            <button className="cancel">Cancel</button>
+                        </ModalContent>
+                        <CloseModalButton aria-label='Close Modal'
+                            onClick={() => setShowModal(!showModal)} />
+                    </ModalWrapper>
                 </div>
         ) : null}
         </>

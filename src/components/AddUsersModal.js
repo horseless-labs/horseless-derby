@@ -49,7 +49,9 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const AddUsersModal = ({ showModal , setShowModal }) => {
+const AddUsersModal = ({ showModal , setShowModal, addUser }) => {
+    const [name, setName] = useState('')
+    const [funds, setFunds] = useState(0)
     const modalRef = useRef();
 
     const closeModal = (e) => {
@@ -69,6 +71,24 @@ const AddUsersModal = ({ showModal , setShowModal }) => {
         return () => document.removeEventListener('keydown', keyPress)
     }, [keyPress])
 
+    const handleName = (e) => {
+        setName(e.target.value)
+    }
+
+    const handleFunds = (e) => {
+        setFunds(e.target.value)
+    }
+
+    const handleClose = () => {
+        setName('')
+        setFunds(0)
+        setShowModal(!showModal)
+    }
+
+    const saveUser = () => {
+        addUser(name, funds)
+    }
+
     return (
         <>
         {showModal ? (
@@ -76,16 +96,22 @@ const AddUsersModal = ({ showModal , setShowModal }) => {
                     <ModalWrapper>
                         <ModalContent>
                             <label htmlFor='add-user-name'>User Name</label>
-                            <input className='add-user-name' placeholder="User Name" />
+                            <input
+                                className='add-user-name'
+                                placeholder="User Name" 
+                                onInput={handleName} />
 
                             <label htmlFor='add-user-amount'>Starting Funds</label>
-                            <input className='add-user-amount' placeholder="0" />
+                            <input
+                                className='add-user-amount'
+                                placeholder="0"
+                                onInput={handleFunds} />
 
-                            <button className="saveBet">OK</button>
-                            <button className="cancel">Cancel</button>
+                            <button className="saveBet" onClick={saveUser}>OK</button>
+                            <button className="cancel" onClick={handleClose}>Cancel</button>
                         </ModalContent>
                         <CloseModalButton aria-label='Close Modal'
-                            onClick={() => setShowModal(!showModal)} />
+                            onClick={handleClose} />
                     </ModalWrapper>
                 </div>
         ) : null}

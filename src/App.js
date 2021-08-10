@@ -33,6 +33,11 @@ function App() {
   const openRaceModal = () => {
     setRaceModal(!showRaceModal)
   }
+
+  const addUser = (name, funds) => {
+    console.log("Name is: " + name)
+    console.log("Amount is: " + funds)
+  }
   
   return (
     <>
@@ -44,7 +49,8 @@ function App() {
         <AddUsersButton onClick={openAddUsersModal} />
         <AddUsersModal
           showModal={showAddUsersModal}
-          setShowModal={setAddUsersModal} />
+          setShowModal={setAddUsersModal}
+          addUser={addUser} />
       </Container>
 
       <Container>

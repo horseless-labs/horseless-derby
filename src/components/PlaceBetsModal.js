@@ -15,7 +15,7 @@ const CloseModalButton = styled(MdClose)`
 
 const ModalWrapper = styled.div`
     width: 400px;
-    height: 250px;
+    height: 350px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     background: #fff;
     color: #000;
@@ -52,6 +52,8 @@ const ModalContent = styled.div`
 const PlaceBetsModal = ({ showModal, setShowModal }) => {
     const modalRef = useRef();
     const [bettor, setBettor] = useState("Select a Bettor")
+    const [horse, setHorse] = useState("Select a Horse")
+    const [position, setPosition] = useState("Select a Position")
 
     // Temporary dummy data
     const bettors = [
@@ -59,7 +61,15 @@ const PlaceBetsModal = ({ showModal, setShowModal }) => {
         {name: "Micah", funds: 100}
     ]
 
-    const nameChange = (e) => {
+    const horseSelection = (e) => {
+        setHorse(e.target.value)
+    }
+
+    const positionSelection = (e) => {
+        setPosition(e.target.value)
+    }
+
+    const userSelection = (e) => {
         setBettor(e.target.value)
     }
 
@@ -86,15 +96,25 @@ const PlaceBetsModal = ({ showModal, setShowModal }) => {
                 <div className='modal-background' ref={modalRef} onClick={closeModal}>
                     <ModalWrapper>
                         <ModalContent>
-                            <label htmlFor='add-user-name'>Bettor:</label>
-                            <select onChange={nameChange} className='add-user-name'>
-                                <option key="initial-list" value="Select a Bettor"> -- Select a Bettor -- </option>
+                            <label htmlFor='horse-selection'>Horse:</label>
+                            <select onChange={horseSelection} className='horse-selection'>
+                                <option key='initial-horse' value="Select a Horse"> -- Select a Horse -- </option>
+                            </select><br />
+
+                            <label htmlFor='finish-position'>Position</label>
+                            <select onChange={positionSelection} className='finish-position'>
+                                <option key='initial-position' value="Select a position"> -- Select a Position -- </option>    
+                            </select><br />
+
+                            <label htmlFor='user-selection'>Bettor:</label>
+                            <select onChange={userSelection} className='user-selection'>
+                                <option key='initial-user' value="Select a Bettor"> -- Select a Bettor -- </option>
                                 {console.log(bettors)}
                                 {bettors.map((bettor) => <option key={bettor.label} value={bettor.value}>{bettor.name}</option>)}
-                            </select>
+                            </select><br />
 
-                            <label htmlFor='add-user-amount'>Bet Amount:</label>
-                            <input className='add-user-amount' placeholder="0" />
+                            <label htmlFor='bet-amount'>Bet Amount:</label>
+                            <input className='bet-amount' placeholder="0" /><br />
 
                             <button className="saveBet">OK</button>
                             <button className="cancel">Cancel</button>

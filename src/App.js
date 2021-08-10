@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import React from 'react'
 
 import styled from 'styled-components'
-import { GlobalStyle } from './globalStyles'
 
 import DisplayRacersButton from './components/DisplayRacersButton'
 import AddUsersButton from './components/AddUsersButton'

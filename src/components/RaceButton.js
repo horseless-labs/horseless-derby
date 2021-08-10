@@ -1,7 +1,7 @@
-const RaceButton = () => {
+const RaceButton = ({ onClick }) => {
   return (
   <>
-    <button className="raceButton">Race!</button>
+    <button className="raceButton" onClick={onClick}>Race!</button>
   </>
   )
 }

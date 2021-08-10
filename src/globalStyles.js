@@ -7,14 +7,15 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Arial', sans-serif;
 
     button {
-      min-width: 100px;
-      padding: 8px 8px;
-      border-radius: 10px;
+      min-width: 150px;
+      padding: 10px 24px;
+      border-radius: 7px;
       border: none;
-      background: brown;
+      background: black;
       color: #fff;
       font-size: 20px;
       cursor: pointer;
+      margin: 5px;
     }
 
     background {
@@ -30,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
       align-items: center;
     }
 
-    div.background {
+    div.modal-background {
       z-index: auto;
       display: flex;
       position: fixed;
@@ -43,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
       align-items: center;
     }
 
-    modal-wrapper {
+    div.modal-wrapper {
       width: 800px;
       height: 500px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -56,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
     }
 
-    modal-content {
+    div.modal-content {
       display: flex;
       flex-direction: column;
       justify-content: center;

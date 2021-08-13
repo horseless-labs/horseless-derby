@@ -2,29 +2,28 @@ import { useState, useEffect } from 'react'
 import { isCompositeComponent } from 'react-dom/test-utils';
 
 const Table = ({ sentData }) => {
-  const [text, setText] = useState('')
+  const [pool, setPool] = useState('')
   const [selected, setSelected] = useState([])
   
   useEffect(() => {
-    setText(sentData);
+    setPool(sentData);
   }, [sentData]);
   
-  const selectCompetitors = (population, racerCount) => {
-    // let ueg = [];
+  const selectCompetitors = (raceSize) => {
+    let ueg = {};
+    var pop_size = Object.keys(pool).length;
 
-    // for (let i = 0; i < racerCount; i++) {
-    //   let index = Math.floor(Math.random() * population.length)
-    //   //ueg.push(text[index])
-    // }
-    // for (const horse in sentData) {
-    //   console.log(sentData[horse])
-    // }
+    for (let i = 0; i < raceSize; i++) {
+      let index = Math.floor(Math.random() * pop_size)
+      ueg[i] = pool[index]
+    }
+    console.log(ueg)
   }
 
   const printHorse = () => {
     var elements = []
 
-    {Object.entries(sentData).map(([key, value]) => {
+    {Object.entries(pool).map(([key, value]) => {
       elements.push(<tr key={key}><td>{value.name}</td><td>{value.odds}</td></tr>)
     })}
     
@@ -44,7 +43,7 @@ const Table = ({ sentData }) => {
           {printHorse()}
         </tbody>
       </table>
-      {/* {selectCompetitors(text, 3)} */}
+      {selectCompetitors(5)}
     </>
 
   )

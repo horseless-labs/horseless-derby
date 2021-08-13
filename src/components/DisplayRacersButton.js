@@ -4,6 +4,7 @@ import Table from './Table'
 const DisplayRacersButton = () => {
   const [data, setData] = useState([])
   const [ready, toggleReady] = useState(false)
+  const [racerCount, setRacerCount] = useState(5)
   
   const getData = () => {
     fetch('horse_small.json'
@@ -24,7 +25,7 @@ const DisplayRacersButton = () => {
 
   return (
     <>
-      <Table sentData={data['horses']} />
+      <Table sentData={data} />
       {/* <button classname={className} onClick={getData}>Bullshit</button> */}
       <button className="showRacersButton" onClick={getData}>Show Racers!</button>
     </>

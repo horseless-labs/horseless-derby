@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const Table = ({ sentData, horsesLoaded }) => {
+const Table = ({ sentData, racersReady, onChange }) => {
   const [racers, setRacers] = useState({})
   const [selected, setSelected] = useState([])
   
@@ -11,7 +11,7 @@ const Table = ({ sentData, horsesLoaded }) => {
   const printHorse = () => {
     var elements = []
 
-    if (horsesLoaded) {
+    if (racersReady) {
       {Object.entries(sentData).map(([key, value]) => {
         elements.push(<tr key={key}><td>{value.name}</td><td>{value.odds}</td></tr>)
       })}

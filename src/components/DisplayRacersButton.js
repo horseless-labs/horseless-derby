@@ -10,21 +10,25 @@ const DisplayRacersButton = () => {
   const [racerCount, setRacerCount] = useState(5)
 
   const getData = () => {
-    fetch('horses.json'
-      , {
-        headers : {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-        .then(function(response) {
-          return response.json();
+    if (!horsesLoaded) {
+      fetch('horses.json'
+        , {
+          headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
         })
-        .then(function(myJson) {
-          setData(myJson);
-          setHorsesLoaded(true);
-          console.log("horses loaded")
-    })
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(myJson) {
+            setData(myJson);
+            setHorsesLoaded(true);
+            console.log("horses loaded")
+      })
+    } else {
+      console.log('horses already loaded')
+    }
   }
 
   const selectCompetitors = (raceSize) => {
@@ -53,7 +57,10 @@ const DisplayRacersButton = () => {
       setHorses(selectCompetitors(racerCount))
       
       // ONLYFOR TESTING PURPOSES!!!!!
-      setHorsesLoaded(false)
+      // Effects:
+      //    Commented   -> The table will only load once
+      //    Uncommented -> The table will load indefinitely
+      //setHorsesLoaded(false)
     }
   }, [horsesLoaded])
 

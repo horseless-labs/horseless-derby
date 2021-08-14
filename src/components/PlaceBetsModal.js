@@ -49,7 +49,7 @@ const ModalContent = styled.div`
     }
 `
 
-const PlaceBetsModal = ({ showModal, setShowModal }) => {
+const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount }) => {
     const modalRef = useRef();
     const [bettor, setBettor] = useState("Select a Bettor")
     const [horse, setHorse] = useState("Select a Horse")
@@ -90,6 +90,28 @@ const PlaceBetsModal = ({ showModal, setShowModal }) => {
         return () => document.removeEventListener('keydown', keyPress)
     }, [keyPress])
 
+    const insertRacers = () => {
+        let elements = []
+        Object.entries(racers).map(([key, value]) => {
+            elements.push(<option key={value.name} value={value.name}>{value.name}</option>)
+        })
+        return (elements)
+    }
+
+    const insertPlaces = () => {
+        let elements = [
+            <option>1st</option>,
+            <option>2nd</option>,
+            <option>3rd</option>,
+        ]
+
+        for (let i = 4; i <= racerCount; i++) {
+            elements.push(<option>{i}th</option>)
+        }
+
+        return (elements)
+    }
+
     return (
         <>
         {showModal ? (
@@ -99,11 +121,13 @@ const PlaceBetsModal = ({ showModal, setShowModal }) => {
                             <label htmlFor='horse-selection'>Horse:</label>
                             <select onChange={horseSelection} className='horse-selection'>
                                 <option key='initial-horse' value="Select a Horse"> -- Select a Horse -- </option>
+                                {insertRacers()}
                             </select><br />
 
                             <label htmlFor='finish-position'>Position</label>
                             <select onChange={positionSelection} className='finish-position'>
-                                <option key='initial-position' value="Select a position"> -- Select a Position -- </option>    
+                                <option key='initial-position' value="Select a position"> -- Select a Position -- </option>
+                                {insertPlaces()}  
                             </select><br />
 
                             <label htmlFor='user-selection'>Bettor:</label>

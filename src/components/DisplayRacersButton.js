@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { update } from 'react-spring'
 import Table from './Table'
 
-const DisplayRacersButton = () => {
+const DisplayRacersButton = ({ handleRacers, racerCount }) => {
   const [data, setData] = useState([])
   const [horsesLoaded, setHorsesLoaded] = useState(false)
   const [racersReady, setRacersReady] = useState(false)
   const [horses, setHorses] = useState({})
-  const [racerCount, setRacerCount] = useState(5)
+  // const [racerCount, setRacerCount] = useState(5)
 
   const getData = () => {
     if (!horsesLoaded) {
@@ -54,13 +54,14 @@ const DisplayRacersButton = () => {
 
   useEffect(() => {
     if (horsesLoaded) {
-      setHorses(selectCompetitors(racerCount))
-      
+      let competitors = selectCompetitors(racerCount)
+      setHorses(competitors)
+      handleRacers(competitors)
       // ONLYFOR TESTING PURPOSES!!!!!
       // Effects:
       //    Commented   -> The table will only load once
       //    Uncommented -> The table will load indefinitely
-      //setHorsesLoaded(false)
+      setHorsesLoaded(false)
     }
   }, [horsesLoaded])
 

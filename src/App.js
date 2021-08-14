@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 
 import styled from 'styled-components'
@@ -22,6 +22,10 @@ function App() {
   const [showPlaceBetsModal, setPlaceBetsModal] = useState(false)
   const [showRaceModal, setRaceModal] = useState(false)
 
+  const [racers, setRacers] = useState([])
+  const [racerCount, setRacerCount] = useState(10)
+
+
   const openAddUsersModal = () => {
     setAddUsersModal(!showAddUsersModal)
   }
@@ -38,11 +42,24 @@ function App() {
     console.log("Name is: " + name)
     console.log("Amount is: " + funds)
   }
+
+  // Handles the list of current competitors from DisplayRacersButton
+  const handleRacers = (horses) => {
+    setRacers(horses)
+  }
+
+  useEffect(() => {
+    console.log("Hello, trying to useEffect for handleRacers()")
+    console.log(racers)
+    console.log(typeof racers)
+  }, [racers])
   
   return (
     <>
       <Container>
-        <DisplayRacersButton />
+        <DisplayRacersButton
+          handleRacers={handleRacers}
+          racerCount={racerCount} />
       </Container>
 
       <Container>
@@ -57,7 +74,9 @@ function App() {
         <PlaceBetsButton onClick={openPlaceBetsModal} />
         <PlaceBetsModal 
           showModal={showPlaceBetsModal}
-          setShowModal={setPlaceBetsModal} />
+          setShowModal={setPlaceBetsModal}
+          racers={racers}
+          racerCount={racerCount} />
       </Container>
 
       <Container>

@@ -53,6 +53,10 @@ function App() {
     console.log(racers)
     console.log(typeof racers)
   }, [racers])
+
+  const saveBet = () => {
+    console.log("Hello from saveBet()")
+  }
   
   return (
     <>
@@ -76,7 +80,8 @@ function App() {
           showModal={showPlaceBetsModal}
           setShowModal={setPlaceBetsModal}
           racers={racers}
-          racerCount={racerCount} />
+          racerCount={racerCount}
+          saveBet={saveBet} />
       </Container>
 
       <Container>

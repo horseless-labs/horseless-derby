@@ -49,11 +49,12 @@ const ModalContent = styled.div`
     }
 `
 
-const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount }) => {
+const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }) => {
     const modalRef = useRef();
     const [bettor, setBettor] = useState("Select a Bettor")
     const [horse, setHorse] = useState("Select a Horse")
     const [position, setPosition] = useState("Select a Position")
+    const [amount, setAmount] = useState(0)
 
     // Temporary dummy data
     const bettors = [
@@ -71,6 +72,10 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount }) => {
 
     const userSelection = (e) => {
         setBettor(e.target.value)
+    }
+
+    const betAmount = (e) => {
+        setAmount(e.target.value)
     }
 
     const closeModal = (e) => {
@@ -100,16 +105,25 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount }) => {
 
     const insertPlaces = () => {
         let elements = [
-            <option>1st</option>,
-            <option>2nd</option>,
-            <option>3rd</option>,
+            <option key='1'>1st</option>,
+            <option key='2'>2nd</option>,
+            <option key='3'>3rd</option>,
         ]
 
         for (let i = 4; i <= racerCount; i++) {
-            elements.push(<option>{i}th</option>)
+            elements.push(<option key={i}>{i}th</option>)
         }
 
         return (elements)
+    }
+
+    const handleBet = () => {
+        console.log(horse)
+        console.log(bettor)
+        console.log(position)
+        console.log(amount)
+
+        saveBet(horse, bettor, position, amount)
     }
 
     return (
@@ -138,10 +152,10 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount }) => {
                             </select><br />
 
                             <label htmlFor='bet-amount'>Bet Amount:</label>
-                            <input className='bet-amount' placeholder="0" /><br />
+                            <input className='bet-amount' placeholder="0" onChange={betAmount}/><br />
 
-                            <button className="saveBet">OK</button>
-                            <button className="cancel">Cancel</button>
+                            <button className="saveBet" onClick={handleBet}>OK</button>
+                            <button className="cancel" onClick={() => setShowModal(!showModal)}>Cancel</button>
                         </ModalContent>
                         <CloseModalButton aria-label='Close Modal' onClick={() => setShowModal(!showModal)} />
                     </ModalWrapper>

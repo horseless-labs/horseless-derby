@@ -25,6 +25,11 @@ function App() {
   const [racers, setRacers] = useState([])
   const [racerCount, setRacerCount] = useState(10)
 
+  // TEMPORARY DUMMY DATA
+  const [bettors, setBettors] = useState([
+    {name: "Marco", funds: 100},
+    {name: "Micah", funds: 100}
+  ])
 
   const openAddUsersModal = () => {
     setAddUsersModal(!showAddUsersModal)
@@ -49,13 +54,17 @@ function App() {
   }
 
   useEffect(() => {
-    console.log("Hello, trying to useEffect for handleRacers()")
-    console.log(racers)
-    console.log(typeof racers)
+    // console.log("Hello, trying to useEffect for handleRacers()")
+    // console.log(racers)
+    // console.log(typeof racers)
   }, [racers])
 
-  const saveBet = () => {
+  const saveBet = (bettor, horse, position, amount) => {
     console.log("Hello from saveBet()")
+    console.log(horse)
+    console.log(bettor)
+    console.log(position)
+    console.log(amount)
   }
   
   return (
@@ -79,6 +88,7 @@ function App() {
         <PlaceBetsModal 
           showModal={showPlaceBetsModal}
           setShowModal={setPlaceBetsModal}
+          bettors={bettors}
           racers={racers}
           racerCount={racerCount}
           saveBet={saveBet} />

@@ -49,18 +49,15 @@ const ModalContent = styled.div`
     }
 `
 
-const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }) => {
+const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, saveBet }) => {
     const modalRef = useRef();
-    const [bettor, setBettor] = useState("Select a Bettor")
-    const [horse, setHorse] = useState("Select a Horse")
-    const [position, setPosition] = useState("Select a Position")
+    const [bettor, setBettor] = useState('')
+    const [horse, setHorse] = useState('')
+    const [position, setPosition] = useState('')
     const [amount, setAmount] = useState(0)
 
-    // Temporary dummy data
-    const bettors = [
-        {name: "Marco", funds: 100},
-        {name: "Micah", funds: 100}
-    ]
+    // States for handling missing data
+    const [errorMessage, setErrorMessage] = useState('')
 
     const horseSelection = (e) => {
         setHorse(e.target.value)
@@ -75,7 +72,7 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
     }
 
     const betAmount = (e) => {
-        setAmount(e.target.value)
+        setAmount(parseInt(e.target.value))
     }
 
     const closeModal = (e) => {
@@ -99,7 +96,7 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
         let elements = []
         Object.entries(racers).map(([key, value]) => {
             elements.push(<option key={value.name} value={value.name}>{value.name}</option>)
-        })
+        })    // Functions to handle missing data
         return (elements)
     }
 
@@ -118,12 +115,33 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
     }
 
     const handleBet = () => {
-        console.log(horse)
-        console.log(bettor)
-        console.log(position)
-        console.log(amount)
+        if (horse === '') {
+            setErrorMessage("No horse has been selected!")
+        } else if (bettor === '') {
+            setErrorMessage("No bettor has been selected!")
+        } else  if (position === '') {
+            setErrorMessage("No position has been selected!")
+        } else if (amount === 0) {
+            setErrorMessage("Empty amount for the bet!")
+        } else if (typeof amount === NaN) {
+            console.log(typeof amount)
+            setErrorMessage("Need to have a number for the bet!")
+        } else if (amount < 0) {
+            setErrorMessage("Can't bet negative money!")
+        } else {
+            saveBet(bettor, horse, position, amount)
+            handleClose()
+        }
 
-        saveBet(horse, bettor, position, amount)
+        //saveBet(bettor, horse, position, amount)
+    }
+
+    const handleClose = () => {
+        setBettor('')
+        setHorse('')
+        setPosition('')
+        setAmount(0)
+        setShowModal(!showModal)
     }
 
     return (
@@ -132,6 +150,9 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
                 <div className='modal-background' ref={modalRef} onClick={closeModal}>
                     <ModalWrapper>
                         <ModalContent>
+                            {errorMessage && (
+                                <p className='error'>{errorMessage}</p>
+                            )}
                             <label htmlFor='horse-selection'>Horse:</label>
                             <select onChange={horseSelection} className='horse-selection'>
                                 <option key='initial-horse' value="Select a Horse"> -- Select a Horse -- </option>
@@ -147,7 +168,6 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
                             <label htmlFor='user-selection'>Bettor:</label>
                             <select onChange={userSelection} className='user-selection'>
                                 <option key='initial-user' value="Select a Bettor"> -- Select a Bettor -- </option>
-                                {console.log(bettors)}
                                 {bettors.map((bettor) => <option key={bettor.label} value={bettor.value}>{bettor.name}</option>)}
                             </select><br />
 
@@ -155,9 +175,9 @@ const PlaceBetsModal = ({ showModal, setShowModal, racers, racerCount, saveBet }
                             <input className='bet-amount' placeholder="0" onChange={betAmount}/><br />
 
                             <button className="saveBet" onClick={handleBet}>OK</button>
-                            <button className="cancel" onClick={() => setShowModal(!showModal)}>Cancel</button>
+                            <button className="cancel" onClick={handleClose}>Cancel</button>
                         </ModalContent>
-                        <CloseModalButton aria-label='Close Modal' onClick={() => setShowModal(!showModal)} />
+                        <CloseModalButton aria-label='Close Modal' onClick={handleClose} />
                     </ModalWrapper>
                 </div>
         ) : null}

@@ -114,6 +114,15 @@ const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, 
         return (elements)
     }
 
+    // Must be a better way to do this. Fix later.
+    const fundSearch = (username) => {
+        for (let i = 0; i < bettors.length; i++) {
+            if (bettors[i].name === username) {
+                return bettors[i].funds
+            }
+        }
+    }
+
     const handleBet = () => {
         if (horse === '') {
             setErrorMessage("No horse has been selected!")
@@ -126,14 +135,14 @@ const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, 
         } else if (typeof amount === NaN) {
             console.log(typeof amount)
             setErrorMessage("Need to have a number for the bet!")
-        } else if (amount < 0) {
-            setErrorMessage("Can't bet negative money!")
+        } else if (amount <= 0) {
+            setErrorMessage("Bet needs to be a positive integer!")
+        } else if (amount > fundSearch(bettor)) {
+            setErrorMessage("Bettor does not have necessary funds")
         } else {
             saveBet(bettor, horse, position, amount)
             handleClose()
         }
-
-        //saveBet(bettor, horse, position, amount)
     }
 
     const handleClose = () => {
@@ -172,7 +181,7 @@ const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, 
                             </select><br />
 
                             <label htmlFor='bet-amount'>Bet Amount:</label>
-                            <input className='bet-amount' placeholder="0" onChange={betAmount}/><br />
+                            <input className='bet-amount' placeholder='0' onChange={betAmount}/><br />
 
                             <button className="saveBet" onClick={handleBet}>OK</button>
                             <button className="cancel" onClick={handleClose}>Cancel</button>

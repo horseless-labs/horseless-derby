@@ -25,6 +25,8 @@ function App() {
   const [racers, setRacers] = useState([])
   const [racerCount, setRacerCount] = useState(10)
 
+  const [bets, setBets] = useState([])
+
   // TEMPORARY DUMMY DATA
   const [bettors, setBettors] = useState([
     {name: "Marco", funds: 100},
@@ -59,13 +61,23 @@ function App() {
     // console.log(typeof racers)
   }, [racers])
 
-  const saveBet = (bettor, horse, position, amount) => {
-    console.log("Hello from saveBet()")
-    console.log(horse)
-    console.log(bettor)
-    console.log(position)
-    console.log(amount)
+  const handleFunds = (username, changeAmount) => {
+    for (let i = 0; i < bettors.length; i++) {
+      if (bettors[i].name === username) {
+        bettors[i].funds += changeAmount
+      }
+    }
   }
+
+  const saveBet = (bettor, horse, position, amount) => {
+    setBets([...bets, {bettor: bettor, horse: horse, position: position, amount:amount}])
+    handleFunds(bettor, -amount)
+  }
+
+  useEffect(() => {
+    console.log(bets)
+    console.log(bettors)
+  }, [bets])
   
   return (
     <>

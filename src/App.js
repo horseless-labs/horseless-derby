@@ -110,7 +110,10 @@ function App() {
         <RaceButton onClick={openRaceModal} />
         <RaceModal 
           showModal={showRaceModal}
-          setShowModal={setRaceModal} />
+          setShowModal={setRaceModal}
+          bettors={bettors}
+          bets={bets}
+          racers={racers} />
       </Container>
     </>
   );

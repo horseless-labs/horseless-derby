@@ -67,6 +67,42 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
         })
     }
 
+    const weightedRandom = (racers) => {
+        console.log("Hello from weightedRandom()")
+        let order = []
+
+        let names = []
+        let weights = []
+
+        Object.entries(racers).map((key, value) => {
+            names.push(racers[value].name)
+            weights.push(racers[value].weight)
+        })
+
+        let length = names.length
+        for (let j = 0; j < length; j++) {
+            let i;
+
+            for (i = 0; i < weights.length; i++) {
+                weights[i] += weights[i - 1] || 0
+            }
+
+            let random = Math.random() * weights[weights.length - 1]
+
+            for (i = 0; i < weights.length; i++) {
+                if (weights[i] > random) {
+                    break
+                }
+            }
+
+            order.push(names[i])
+            names.splice(i, 1)
+            weights.splice(i, 1)
+        }
+        console.log(order)
+        return order
+    }
+
     return (
         <>
             { showModal ? (
@@ -74,8 +110,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
                     <ModalWrapper>
                         <ModalContent>
                             {convertToWeights(racers)}
-                            {console.log("After convertToWeights() has been run")}
-                            {console.log(racers)}
+                            {weightedRandom(racers)}
                             <button className="okButton" onClick={() => setShowModal(!showModal)}>OK</button>
                         </ModalContent>
                     </ModalWrapper>

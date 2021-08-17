@@ -58,6 +58,16 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
         }
     }
 
+    const searchRacers = (query) => {
+        for (const racer in racers) {
+            if (racers[racer].name === query) {
+                console.log("Hello from searchRacers()")
+                console.log(racers[racer])
+                return racers[racer];
+            }
+        }
+    }
+
     const convertToWeights = (racers) => {
         console.log("Hello from convertToWeights()")
         Object.entries(racers).map((key, value) => {
@@ -99,8 +109,34 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
             names.splice(i, 1)
             weights.splice(i, 1)
         }
-        console.log(order)
         return order
+    }
+
+    const runRace = () => {
+        convertToWeights(racers)
+        let race_order = weightedRandom(racers)
+        console.log("Bettors are")
+        console.log(bettors)
+        for (const user in bets) {
+            let user_amount = bets[user].amount
+            let user_horse = bets[user].horse
+            let user_place = parseInt(bets[user].position[0])
+
+            console.log(user_amount)
+            console.log(user_horse)
+            console.log(user_place)
+            if (race_order[user_place-1] === user_horse) {
+                let racer = searchRacers(user_horse)
+                console.log("The racer is")
+                console.log(racer)
+                let payout = parseInt(racer.odds.split('/')[0] * user_amount)
+                console.log(payout)
+                bettors[user].funds += payout
+            }
+        }
+        console.log("Race conclusion")
+        console.log(race_order)
+        console.log(bettors)
     }
 
     return (
@@ -109,8 +145,8 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
                 <div className='modal-background' ref={modalRef} onClick={closeModal}>
                     <ModalWrapper>
                         <ModalContent>
-                            {convertToWeights(racers)}
-                            {weightedRandom(racers)}
+                            {/* {convertToWeights(racers)} */}
+                            {runRace()}
                             <button className="okButton" onClick={() => setShowModal(!showModal)}>OK</button>
                         </ModalContent>
                     </ModalWrapper>

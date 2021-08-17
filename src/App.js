@@ -23,7 +23,7 @@ function App() {
   const [showRaceModal, setRaceModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(10)
+  const [racerCount, setRacerCount] = useState(1)
 
   const [bets, setBets] = useState([])
 

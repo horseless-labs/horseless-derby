@@ -48,6 +48,7 @@ function App() {
   const addUser = (name, funds) => {
     console.log("Name is: " + name)
     console.log("Amount is: " + funds)
+    setBettors([...bettors, {name: name, funds: parseInt(funds)}])
   }
 
   // Handles the list of current competitors from DisplayRacersButton
@@ -55,11 +56,6 @@ function App() {
     setRacers(horses)
   }
 
-  useEffect(() => {
-    // console.log("Hello, trying to useEffect for handleRacers()")
-    // console.log(racers)
-    // console.log(typeof racers)
-  }, [racers])
 
   const handleFunds = (username, changeAmount) => {
     for (let i = 0; i < bettors.length; i++) {
@@ -74,10 +70,7 @@ function App() {
     handleFunds(bettor, -amount)
   }
 
-  useEffect(() => {
-    console.log(bets)
-    console.log(bettors)
-  }, [bets])
+  useEffect(() => {}, [bets, bettors, racers])
   
   return (
     <>
@@ -88,7 +81,7 @@ function App() {
       </Container>
 
       <Container>
-        <AddUsersButton onClick={openAddUsersModal} />
+        <AddUsersButton onClick={openAddUsersModal} bettors={bettors} />
         <AddUsersModal
           showModal={showAddUsersModal}
           setShowModal={setAddUsersModal}

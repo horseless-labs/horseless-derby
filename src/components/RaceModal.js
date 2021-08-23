@@ -127,10 +127,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
             console.log(user_place)
             if (race_order[user_place-1] === user_horse) {
                 let racer = searchRacers(user_horse)
-                console.log("The racer is")
-                console.log(racer)
                 let payout = parseInt(racer.odds.split('/')[0] * user_amount)
-                console.log(payout)
                 bettors[user].funds += payout
             }
         }

@@ -49,7 +49,7 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const AddUsersModal = ({ showModal , setShowModal, addUser }) => {
+const AddUsersModal = ({ showModal, setShowModal, addUser }) => {
     const [name, setName] = useState('')
     const [funds, setFunds] = useState(0)
     const modalRef = useRef();

@@ -23,21 +23,33 @@ function App() {
   const [showRaceModal, setRaceModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(1)
+  const [racerCount, setRacerCount] = useState(5)
 
   const [bets, setBets] = useState([])
 
   // TEMPORARY DUMMY DATA
-  const [bettors, setBettors] = useState([
-    {name: "Marco", funds: 100},
-    {name: "Micah", funds: 100}
-  ])
+  // const [bettors, setBettors] = useState([
+  //   {name: "Marco", funds: 100},
+  //   {name: "Micah", funds: 100}
+  // ])
+
+  const [bettors, setBettors] = useState(JSON.parse(localStorage.getItem('bettors')))
+
+  const handleLocalStorage = () => {
+    let local_bettors = localStorage.getItem('bettors')
+    console.log("Hello from handleLocalBettors")
+    console.log(local_bettors)
+    if (local_bettors !== []) {
+      setBettors(JSON.parse(local_bettors))
+    }
+  }
 
   const openAddUsersModal = () => {
     setAddUsersModal(!showAddUsersModal)
   }
 
   const openPlaceBetsModal = () => {
+    handleLocalStorage()
     setPlaceBetsModal(!showPlaceBetsModal)
   }
 
@@ -70,7 +82,12 @@ function App() {
     handleFunds(bettor, -amount)
   }
 
-  useEffect(() => {}, [bets, bettors, racers])
+  useEffect(() => {}, [bets, racers])
+
+  useEffect(() => {
+    localStorage.setItem('bettors', JSON.stringify(bettors))
+    console.log(bettors)
+  }, [bettors])
   
   return (
     <>

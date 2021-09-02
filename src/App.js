@@ -33,18 +33,20 @@ function App() {
   //   {name: "Micah", funds: 100}
   // ])
 
-  const [bettors, setBettors] = useState(JSON.parse(localStorage.getItem('bettors')))
+  // const [bettors, setBettors] = useState(JSON.parse(localStorage.getItem('bettors')))
+  const [bettors, setBettors] = useState([])
 
   const handleLocalStorage = () => {
     let local_bettors = localStorage.getItem('bettors')
     console.log("Hello from handleLocalBettors")
     console.log(local_bettors)
-    if (local_bettors !== []) {
+    if (local_bettors !== null) {
       setBettors(JSON.parse(local_bettors))
     }
   }
 
   const openAddUsersModal = () => {
+    handleLocalStorage()
     setAddUsersModal(!showAddUsersModal)
   }
 
@@ -61,6 +63,10 @@ function App() {
     console.log("Name is: " + name)
     console.log("Amount is: " + funds)
     setBettors([...bettors, {name: name, funds: parseInt(funds)}])
+    console.log("Hello from addUser()")
+    console.log(bettors)
+    // localStorage.setItem('bettors', JSON.stringify(bettors))
+    // handleLocalStorage()
   }
 
   // Handles the list of current competitors from DisplayRacersButton
@@ -85,8 +91,13 @@ function App() {
   useEffect(() => {}, [bets, racers])
 
   useEffect(() => {
-    localStorage.setItem('bettors', JSON.stringify(bettors))
-    console.log(bettors)
+    if (bettors !== null && bettors.length !== 0) {
+      console.log(bettors)
+      console.log("current bettors added to localStorage")
+      console.log(bettors.length)
+      localStorage.setItem('bettors', JSON.stringify(bettors))
+    }
+
   }, [bettors])
   
   return (

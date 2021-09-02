@@ -65,7 +65,7 @@ function App() {
     setBettors([...bettors, {name: name, funds: parseInt(funds)}])
     console.log("Hello from addUser()")
     console.log(bettors)
-    // localStorage.setItem('bettors', JSON.stringify(bettors))
+    localStorage.setItem('bettors', JSON.stringify(bettors))
     // handleLocalStorage()
   }
 

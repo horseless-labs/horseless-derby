@@ -12,8 +12,15 @@ import AddUsersModal from './components/AddUsersModal'
 import PlaceBetsModal from './components/PlaceBetsModal'
 import RaceModal from './components/RaceModal'
 
+import Header from './components/Header'
+
 const Container = styled.div`
   display: block;
+`
+
+const ButtonContainer = styled.div`
+  display: block:
+  width: 25%;
 `
 
 function App() {
@@ -112,44 +119,50 @@ function App() {
   return (
     <>
       <Container>
-        <DisplayRacersButton
-          handleRacers={handleRacers}
-          racerCount={racerCount}
-          racersReady={racersReady}
-          setRacersReady={setRacersReady} />
+        <Header />
       </Container>
 
-      <Container>
-        <AddUsersButton onClick={openAddUsersModal} bettors={bettors} />
-        <AddUsersModal
-          showModal={showAddUsersModal}
-          setShowModal={setAddUsersModal}
-          addUser={addUser} />
-      </Container>
+      <div class="split left">
+        <Container>
+          <DisplayRacersButton
+            handleRacers={handleRacers}
+            racerCount={racerCount}
+            racersReady={racersReady}
+            setRacersReady={setRacersReady} />
+        </Container>
 
-      <Container>
-        <PlaceBetsButton onClick={openPlaceBetsModal} />
-        <PlaceBetsModal 
-          showModal={showPlaceBetsModal}
-          setShowModal={setPlaceBetsModal}
-          bettors={bettors}
-          racers={racers}
-          racerCount={racerCount}
-          saveBet={saveBet} />
-      </Container>
+        <Container>
+          <AddUsersButton onClick={openAddUsersModal} bettors={bettors} />
+          <AddUsersModal
+            showModal={showAddUsersModal}
+            setShowModal={setAddUsersModal}
+            addUser={addUser} />
+        </Container>
 
-      <Container>
-        <RaceButton onClick={openRaceModal} />
-        <RaceModal 
-          showModal={showRaceModal}
-          setShowModal={setRaceModal}
-          bettors={bettors}
-          bets={bets}
-          racers={racers}
-          handleBets={handleBets}
-          racersReady={racersReady}
-          setRacersReady={setRacersReady} />
-      </Container>
+        <Container>
+          <PlaceBetsButton onClick={openPlaceBetsModal} />
+          <PlaceBetsModal 
+            showModal={showPlaceBetsModal}
+            setShowModal={setPlaceBetsModal}
+            bettors={bettors}
+            racers={racers}
+            racerCount={racerCount}
+            saveBet={saveBet} />
+        </Container>
+
+        <Container>
+          <RaceButton onClick={openRaceModal} />
+          <RaceModal 
+            showModal={showRaceModal}
+            setShowModal={setRaceModal}
+            bettors={bettors}
+            bets={bets}
+            racers={racers}
+            handleBets={handleBets}
+            racersReady={racersReady}
+            setRacersReady={setRacersReady} />
+        </Container>
+      </div>
     </>
   );
 }

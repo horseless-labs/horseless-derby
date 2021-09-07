@@ -80,6 +80,21 @@ const GlobalStyle = createGlobalStyle`
     label {
       font-family: sans-serif;
     }
+
+    .split {
+      width: 30%;
+      position:fixed;
+
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      width: 70%;
+      right: 0;
+    }
 `
 
 export default GlobalStyle

@@ -21,7 +21,7 @@ const Table = ({ sentData, racersReady }) => {
   }
   
   return (
-    <>
+    <div class="split right">
       <table className='horse-table'>
         <thead>
           <tr className='table-header'>
@@ -33,7 +33,7 @@ const Table = ({ sentData, racersReady }) => {
           {printHorse()}
         </tbody>
       </table>
-    </>
+    </div>
 
   )
 }

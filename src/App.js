@@ -23,7 +23,8 @@ function App() {
   const [showRaceModal, setRaceModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(1)
+  const [racerCount, setRacerCount] = useState(5)
+  const [racersReady, setRacersReady] = useState(false)
 
   const [bets, setBets] = useState([])
   const [bettors, setBettors] = useState([])
@@ -113,7 +114,9 @@ function App() {
       <Container>
         <DisplayRacersButton
           handleRacers={handleRacers}
-          racerCount={racerCount} />
+          racerCount={racerCount}
+          racersReady={racersReady}
+          setRacersReady={setRacersReady} />
       </Container>
 
       <Container>
@@ -143,7 +146,9 @@ function App() {
           bettors={bettors}
           bets={bets}
           racers={racers}
-          handleBets={handleBets} />
+          handleBets={handleBets}
+          racersReady={racersReady}
+          setRacersReady={setRacersReady} />
       </Container>
     </>
   );

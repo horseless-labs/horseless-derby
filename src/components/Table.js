@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const Table = ({ sentData, racersReady, setRacersReady }) => {
+const Table = ({ sentData, racersReady }) => {
   const [racers, setRacers] = useState({})
   const [selected, setSelected] = useState([])
   
@@ -19,17 +19,6 @@ const Table = ({ sentData, racersReady, setRacersReady }) => {
     
     return (elements)
   }
-
-  // const keyPress = useCallback(e => {
-  //   if (e.key === 'Escape' && racersReady) {
-  //     console.log("Horses can be loaded again")
-  //     setRacersReady(false)
-  //   }
-  // }, [setRacersReady, racersReady])
-
-  // useEffect(() => {
-  //   document.addEventListener('keydown', keyPress)
-  // }, [keyPress])
   
   return (
     <>
@@ -41,7 +30,6 @@ const Table = ({ sentData, racersReady, setRacersReady }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {selectCompetitors(5)} */}
           {printHorse()}
         </tbody>
       </table>

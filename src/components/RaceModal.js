@@ -49,7 +49,7 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets }) => {
+const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets, racersReady, setRacersReady }) => {
     const modalRef = useRef();
 
     const closeModal = (e) => {
@@ -146,13 +146,13 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets 
             ueg.push(<h3>{race_order[i]} came in {[i+1]}th!</h3>)
         }
 
-        // handleBets()
         return ueg
     }
 
     const handleClick = () => {
         setShowModal(!showModal)
         handleBets()
+        setRacersReady(false)
     }
 
     return (

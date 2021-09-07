@@ -2,10 +2,17 @@ import { useState, useEffect } from 'react'
 import { update } from 'react-spring'
 import Table from './Table'
 
-const DisplayRacersButton = ({ handleRacers, racerCount }) => {
+import styled from 'styled-components'
+
+const Container = styled.div`
+  background-color: red;
+  display: block;
+`
+
+const DisplayRacersButton = ({ handleRacers, racerCount, racersReady, setRacersReady }) => {
   const [data, setData] = useState([])
   const [horsesLoaded, setHorsesLoaded] = useState(false)
-  const [racersReady, setRacersReady] = useState(false)
+  // const [racersReady, setRacersReady] = useState(false)
   const [horses, setHorses] = useState({})
   // const [racerCount, setRacerCount] = useState(5)
 
@@ -67,8 +74,15 @@ const DisplayRacersButton = ({ handleRacers, racerCount }) => {
 
   return (
     <>
-      <Table sentData={horses} racersReady={racersReady} setRacersReady={setRacersReady} />
-      <button className="showRacersButton" onClick={getData}>Show Racers!</button>
+      {racersReady ? (
+        <Container>
+          <Table sentData={horses} racersReady={racersReady} setRacersReady={setRacersReady} />
+          {/* <button className="showRacersButton" onClick={getData}>Show Racers!</button> */}
+        </Container>
+        ) : null}
+      <div>
+        <button className="showRacersButton" onClick={getData}>Show Racers!</button>
+      </div>
     </>
   )
 }

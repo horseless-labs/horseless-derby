@@ -23,25 +23,26 @@ function App() {
   const [showRaceModal, setRaceModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(5)
+  const [racerCount, setRacerCount] = useState(1)
 
   const [bets, setBets] = useState([])
-
-  // TEMPORARY DUMMY DATA
-  // const [bettors, setBettors] = useState([
-  //   {name: "Marco", funds: 100},
-  //   {name: "Micah", funds: 100}
-  // ])
-
-  // const [bettors, setBettors] = useState(JSON.parse(localStorage.getItem('bettors')))
   const [bettors, setBettors] = useState([])
 
   const handleLocalStorage = () => {
     let local_bettors = localStorage.getItem('bettors')
-    console.log("Hello from handleLocalBettors")
+    let local_bets = localStorage.getItem('bets')
+
+    console.log("local_bettors looks like")
     console.log(local_bettors)
+    console.log("local_bets looks like")
+    console.log(local_bets)
+
     if (local_bettors !== null) {
       setBettors(JSON.parse(local_bettors))
+    }
+
+    if (local_bets !== null) {
+      setBets(JSON.parse(local_bets))
     }
   }
 
@@ -74,6 +75,9 @@ function App() {
     setRacers(horses)
   }
 
+  const handleBets = () => {
+    setBets([])
+  }
 
   const handleFunds = (username, changeAmount) => {
     for (let i = 0; i < bettors.length; i++) {
@@ -88,17 +92,21 @@ function App() {
     handleFunds(bettor, -amount)
   }
 
-  useEffect(() => {}, [bets, racers])
+  useEffect(() => {}, [racers])
 
   useEffect(() => {
     if (bettors !== null && bettors.length !== 0) {
-      console.log(bettors)
       console.log("current bettors added to localStorage")
-      console.log(bettors.length)
+      console.log(bettors)
+
+      console.log("current bets added to localStorage")
+      console.log(bets)
+      
       localStorage.setItem('bettors', JSON.stringify(bettors))
+      localStorage.setItem('bets', JSON.stringify(bets))
     }
 
-  }, [bettors])
+  }, [bets, bettors])
   
   return (
     <>
@@ -134,7 +142,8 @@ function App() {
           setShowModal={setRaceModal}
           bettors={bettors}
           bets={bets}
-          racers={racers} />
+          racers={racers}
+          handleBets={handleBets} />
       </Container>
     </>
   );

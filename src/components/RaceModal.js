@@ -49,7 +49,7 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
+const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets }) => {
     const modalRef = useRef();
 
     const closeModal = (e) => {
@@ -130,10 +130,29 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
                 let payout = parseInt(racer.odds.split('/')[0] * user_amount)
                 bettors[user].funds += payout
             }
+
         }
+
         console.log("Race conclusion")
         console.log(race_order)
         console.log(bettors)
+
+        let ueg = []
+        ueg.push(<h3>{race_order[0]} came in 1st!</h3>)
+        ueg.push(<h3>{race_order[1]} came in 2nd!</h3>)
+        ueg.push(<h3>{race_order[2]} came in 3rd!</h3>)
+
+        for (let i = 3; i < race_order.length; i++) {
+            ueg.push(<h3>{race_order[i]} came in {[i+1]}th!</h3>)
+        }
+
+        // handleBets()
+        return ueg
+    }
+
+    const handleClick = () => {
+        setShowModal(!showModal)
+        handleBets()
     }
 
     return (
@@ -144,7 +163,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers }) => {
                         <ModalContent>
                             {/* {convertToWeights(racers)} */}
                             {runRace()}
-                            <button className="okButton" onClick={() => setShowModal(!showModal)}>OK</button>
+                            <button className="okButton" onClick={handleClick}>OK</button>
                         </ModalContent>
                     </ModalWrapper>
                 </div>

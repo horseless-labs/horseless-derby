@@ -4,11 +4,11 @@ import { MdClose } from 'react-icons/md'
 
 const ModalWrapper = styled.div`
     width: 400px;
-    height: 300px;
+    height: 1fr;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     background: #fff;
     color: #000;
-    display: grid;
+    display: block;
     grid-template-columns: 1fr 1fr;
     position: relative;
     z-index: 10;
@@ -40,7 +40,7 @@ const ModalContent = styled.div`
 
 const CloseModalButton = styled(MdClose)`
     cursor: pointer;
-    position: absolute;
+    position: center;
     top: 20px;
     right: 20px;
     width: 32px;
@@ -161,7 +161,6 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets,
                 <div className='modal-background' ref={modalRef} onClick={closeModal}>
                     <ModalWrapper>
                         <ModalContent>
-                            {/* {convertToWeights(racers)} */}
                             {runRace()}
                             <button className="okButton" onClick={handleClick}>OK</button>
                         </ModalContent>

@@ -13,7 +13,7 @@ import PlaceBetsModal from './components/PlaceBetsModal'
 import RaceModal from './components/RaceModal'
 
 const Container = styled.div`
-  display: flex;
+  display: block;
 `
 
 function App() {

@@ -5,8 +5,7 @@ import Table from './Table'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  background-color: red;
-  display: block;
+display: block;
 `
 
 const DisplayRacersButton = ({ handleRacers, racerCount, racersReady, setRacersReady }) => {
@@ -76,13 +75,13 @@ const DisplayRacersButton = ({ handleRacers, racerCount, racersReady, setRacersR
     <>
       {racersReady ? (
         <Container>
-          <Table sentData={horses} racersReady={racersReady} setRacersReady={setRacersReady} />
+          <Table sentData={horses} racersReady={racersReady} setRacersReady={setRacersReady} />< br />
           {/* <button className="showRacersButton" onClick={getData}>Show Racers!</button> */}
         </Container>
         ) : null}
-      <div>
+      <Container>
         <button className="showRacersButton" onClick={getData}>Show Racers!</button>
-      </div>
+      </Container>
     </>
   )
 }

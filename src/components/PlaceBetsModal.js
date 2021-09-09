@@ -94,7 +94,7 @@ const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, 
 
     const insertRacers = () => {
         let elements = []
-        Object.entries(racers).map(([key, value]) => {
+        Object.entries(racers).forEach(([key, value]) => {
             elements.push(<option key={value.name} value={value.name}>{value.name}</option>)
         })    // Functions to handle missing data
         return (elements)
@@ -132,7 +132,8 @@ const PlaceBetsModal = ({ showModal, setShowModal, bettors, racers, racerCount, 
             setErrorMessage("No position has been selected!")
         } else if (amount === 0) {
             setErrorMessage("Empty amount for the bet!")
-        } else if (typeof amount === NaN) {
+        // } else if (typeof amount === NaN) {
+        } else if (isNaN(amount)) {
             console.log(typeof amount)
             setErrorMessage("Need to have a number for the bet!")
         } else if (amount <= 0) {

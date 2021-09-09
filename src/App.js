@@ -22,13 +22,7 @@ const Container = styled.div`
   display: block;
 `
 
-const ButtonContainer = styled.div`
-  display: block:
-  width: 25%;
-`
-
 function App() {
-  const [ready, setReady] = useState(false);
   const [showAddUsersModal, setAddUsersModal] = useState(false)
   const [showShowUsersModal, setShowUsersModal] = useState(false)
   const [showPlaceBetsModal, setPlaceBetsModal] = useState(false)
@@ -36,7 +30,7 @@ function App() {
   const [showNewGameModal, setNewGameModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(1)
+  const [racerCount, setRacerCount] = useState(5)
   const [racersReady, setRacersReady] = useState(false)
 
   const [bets, setBets] = useState([])

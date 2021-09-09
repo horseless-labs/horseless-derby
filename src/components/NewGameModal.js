@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 
@@ -78,6 +78,7 @@ const NewGameModal = ({ showModal, setShowModal, startNewGame }) => {
                             <button className="okButton" onClick={handleNewGame}>OK</button>
                             <button className="cancelButton" onClick={handleClose}>Cancel</button>
                         </ModalContent>
+                        <CloseModalButton aria-label='Close Modal' onClick={handleClose} />
                     </ModalWrapper>
                 </div>
             ) : null}

@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 
 const Table = ({ sentData, racersReady }) => {
   const [racers, setRacers] = useState({})
-  const [selected, setSelected] = useState([])
   
   useEffect(() => {
     setRacers(sentData)
@@ -12,9 +11,9 @@ const Table = ({ sentData, racersReady }) => {
     var elements = []
 
     if (racersReady) {
-      {Object.entries(sentData).map(([key, value]) => {
+      Object.entries(sentData).forEach(([key, value]) => {
         elements.push(<tr key={key}><td>{value.name}</td><td>{value.odds}</td></tr>)
-      })}
+      })
     }
     
     return (elements)

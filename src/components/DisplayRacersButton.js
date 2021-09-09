@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { update } from 'react-spring'
 import Table from './Table'
 
 import styled from 'styled-components'

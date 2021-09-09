@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 
@@ -72,7 +72,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, setRacers, 
 
     const convertToWeights = (racers) => {
         console.log("Hello from convertToWeights()")
-        Object.entries(racers).map((key, value) => {
+        Object.entries(racers).forEach((key, value) => {
             let odds = racers[value].odds.split`/`.map(x => +x)
             let weight = odds[1] / (odds[0] + odds[1])
             racers[value].weight = weight
@@ -86,7 +86,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, setRacers, 
         let names = []
         let weights = []
 
-        Object.entries(racers).map((key, value) => {
+        Object.entries(racers).forEach((key, value) => {
             names.push(racers[value].name)
             weights.push(racers[value].weight)
         })

@@ -9,10 +9,12 @@ import PlaceBetsButton from './components/PlaceBetsButton'
 import RaceButton from './components/RaceButton'
 
 import AddUsersModal from './components/AddUsersModal'
+import ShowUsersModal from './components/ShowUsersModal'
 import PlaceBetsModal from './components/PlaceBetsModal'
 import RaceModal from './components/RaceModal'
 
 import Header from './components/Header'
+import ShowUsersButton from './components/ShowUsersButton'
 
 const Container = styled.div`
   display: block;
@@ -26,6 +28,7 @@ const ButtonContainer = styled.div`
 function App() {
   const [ready, setReady] = useState(false);
   const [showAddUsersModal, setAddUsersModal] = useState(false)
+  const [showShowUsersModal, setShowUsersModal] = useState(false)
   const [showPlaceBetsModal, setPlaceBetsModal] = useState(false)
   const [showRaceModal, setRaceModal] = useState(false)
 
@@ -57,6 +60,11 @@ function App() {
   const openAddUsersModal = () => {
     handleLocalStorage()
     setAddUsersModal(!showAddUsersModal)
+  }
+
+  const openShowUsersModal = () => {
+    handleLocalStorage()
+    setShowUsersModal(!showShowUsersModal)
   }
 
   const openPlaceBetsModal = () => {
@@ -137,6 +145,14 @@ function App() {
             showModal={showAddUsersModal}
             setShowModal={setAddUsersModal}
             addUser={addUser} />
+        </Container>
+
+        <Container>
+          <ShowUsersButton onClick={openShowUsersModal} />
+          <ShowUsersModal 
+            showModal={showShowUsersModal}
+            setShowModal={setShowUsersModal}
+            bettors={bettors} />
         </Container>
 
         <Container>

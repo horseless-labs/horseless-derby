@@ -50,11 +50,12 @@ const CloseModalButton = styled(MdClose)`
 `
 
 const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets, racersReady, setRacersReady }) => {
-    const modalRef = useRef();
+    const modalRef = useRef()
 
     const closeModal = (e) => {
         if (modalRef.current === e.target) {
             setShowModal(false)
+            handleBets()
         }
     }
 
@@ -63,7 +64,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets,
             if (racers[racer].name === query) {
                 console.log("Hello from searchRacers()")
                 console.log(racers[racer])
-                return racers[racer];
+                return racers[racer]
             }
         }
     }
@@ -149,7 +150,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets,
         return ueg
     }
 
-    const handleClick = () => {
+    const handleClose = () => {
         setShowModal(!showModal)
         handleBets()
         setRacersReady(false)
@@ -162,8 +163,10 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets,
                     <ModalWrapper>
                         <ModalContent>
                             {runRace()}
-                            <button className="okButton" onClick={handleClick}>OK</button>
+                            <button className="okButton" onClick={handleClose}>OK</button>
                         </ModalContent>
+                        {/* <CloseModalButton aria-label='Close Modal'
+                            onClick={handleClose} /> */}
                     </ModalWrapper>
                 </div>
             ) : null }

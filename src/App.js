@@ -7,11 +7,13 @@ import DisplayRacersButton from './components/DisplayRacersButton'
 import AddUsersButton from './components/AddUsersButton'
 import PlaceBetsButton from './components/PlaceBetsButton'
 import RaceButton from './components/RaceButton'
+import NewGameButton from './components/NewGameButton'
 
 import AddUsersModal from './components/AddUsersModal'
 import ShowUsersModal from './components/ShowUsersModal'
 import PlaceBetsModal from './components/PlaceBetsModal'
 import RaceModal from './components/RaceModal'
+import NewGameModal from './components/NewGameModal'
 
 import Header from './components/Header'
 import ShowUsersButton from './components/ShowUsersButton'
@@ -31,6 +33,7 @@ function App() {
   const [showShowUsersModal, setShowUsersModal] = useState(false)
   const [showPlaceBetsModal, setPlaceBetsModal] = useState(false)
   const [showRaceModal, setRaceModal] = useState(false)
+  const [showNewGameModal, setNewGameModal] = useState(false)
 
   const [racers, setRacers] = useState([])
   const [racerCount, setRacerCount] = useState(5)
@@ -76,6 +79,11 @@ function App() {
     setRaceModal(!showRaceModal)
   }
 
+  const openNewGameModal = () => {
+    console.log("openNewGameModal triggered")
+    setNewGameModal(!showNewGameModal)
+  }
+
   const addUser = (name, funds) => {
     console.log("Name is: " + name)
     console.log("Amount is: " + funds)
@@ -106,6 +114,16 @@ function App() {
   const saveBet = (bettor, horse, position, amount) => {
     setBets([...bets, {bettor: bettor, horse: horse, position: position, amount:amount}])
     handleFunds(bettor, -amount)
+  }
+
+  // Clears all game information and localStorage
+  const startNewGame = () => {
+    console.log("Hello from startNewGame()")
+    setRacers([])
+    setBets([])
+    setBettors([])
+    localStorage.clear()
+    handleLocalStorage()
   }
 
   useEffect(() => {}, [racers])
@@ -177,6 +195,14 @@ function App() {
             handleBets={handleBets}
             racersReady={racersReady}
             setRacersReady={setRacersReady} />
+        </Container>
+
+        <Container>
+          <NewGameButton onClick={openNewGameModal} />
+          <NewGameModal 
+            showModal={showNewGameModal}
+            setShowModal={setNewGameModal}
+            startNewGame={startNewGame} />
         </Container>
       </div>
     </>

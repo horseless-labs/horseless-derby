@@ -49,13 +49,14 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `
 
-const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets, racersReady, setRacersReady }) => {
+const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, setRacers, handleBets, racersReady, setRacersReady }) => {
     const modalRef = useRef()
 
     const closeModal = (e) => {
         if (modalRef.current === e.target) {
             setShowModal(false)
             handleBets()
+            setRacers([])
         }
     }
 
@@ -154,6 +155,7 @@ const RaceModal = ({ showModal, setShowModal, bettors, bets, racers, handleBets,
         setShowModal(!showModal)
         handleBets()
         setRacersReady(false)
+        setRacers([])
     }
 
     return (

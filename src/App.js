@@ -36,7 +36,7 @@ function App() {
   const [showNewGameModal, setNewGameModal] = useState(false)
 
   const [racers, setRacers] = useState([])
-  const [racerCount, setRacerCount] = useState(5)
+  const [racerCount, setRacerCount] = useState(1)
   const [racersReady, setRacersReady] = useState(false)
 
   const [bets, setBets] = useState([])
@@ -192,6 +192,7 @@ function App() {
             bettors={bettors}
             bets={bets}
             racers={racers}
+            setRacers={setRacers}
             handleBets={handleBets}
             racersReady={racersReady}
             setRacersReady={setRacersReady} />
